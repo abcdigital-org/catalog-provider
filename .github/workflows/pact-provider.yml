@@ -14,7 +14,7 @@ permissions:
 env:
   NODE_VERSION: '18'
   ORG_NAME: abcdigital-org
-  CONTRACTS_REPO: contracts-repo
+  CONTRACTS_REPO: contract-repo
   PACT_SUBDIR: catalog-service
   STATUS_CONTEXT: provider/catalog/pact
 
