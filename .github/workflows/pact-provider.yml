@@ -3,6 +3,10 @@ name: Catalog Pact Provider
 on:
   repository_dispatch:
     types: [verify-pact]
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
 
 defaults:
   run:
@@ -12,7 +16,7 @@ permissions:
   contents: read
 
 env:
-  NODE_VERSION: '18'
+  NODE_VERSION: '22'
   ORG_NAME: abcdigital-org
   CONTRACTS_REPO: contract-repo
   PACT_SUBDIR: catalog-service
@@ -82,6 +86,8 @@ jobs:
       - name: Report verification result
         if: always()
         env:
+          CONTRACT_PAT: ${{ secrets.CONTRACT_PAT }}
+          STATUS_PAT: ${{ secrets.STATUS_PAT }}
           GH_TOKEN: ${{ secrets.STATUS_PAT }}
           CONSUMER_REPO: ${{ github.event.client_payload.consumer_repo }}
           CONSUMER_SHA: ${{ github.event.client_payload.consumer_sha }}
