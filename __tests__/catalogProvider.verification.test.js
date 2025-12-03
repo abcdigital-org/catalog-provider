@@ -11,7 +11,7 @@ const pactDir = path.resolve(process.cwd(), 'pacts');
 const catalogPacts = () =>
   fs
     .readdirSync(pactDir)
-    .filter((file) => file.endsWith('-ProductCatalogService.json'))
+    .filter((file) => file.endsWith('-CatalogService.json'))
     .map((file) => path.join(pactDir, file));
 
 describe('Catalog provider Pact verification', () => {
@@ -35,15 +35,15 @@ describe('Catalog provider Pact verification', () => {
     }
   });
 
-  it('satisfies all consumer expectations for ProductCatalogService', async () => {
+  it('satisfies all consumer expectations for CatalogService', async () => {
     const pactFiles = catalogPacts();
 
     if (pactFiles.length === 0) {
-      throw new Error('No pact files found for ProductCatalogService. Ensure consumer workflow attached pact artifacts.');
+      throw new Error('No pact files found for CatalogService. Ensure consumer workflow attached pact artifacts.');
     }
 
     const verifier = new Verifier({
-      provider: 'ProductCatalogService',
+      provider: 'CatalogService',
       logLevel: 'info',
       providerBaseUrl: `http://localhost:${DEFAULT_PORT}`,
       pactUrls: pactFiles,
